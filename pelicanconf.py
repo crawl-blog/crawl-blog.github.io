@@ -53,4 +53,3 @@ SHORTCODES = {
 # comments
 UTTERANCES_REPO = 'crawl-blog/crawl-blog.github.io'
 APPLAUSE_BUTTON = True
-GOOGLE_ANALYTICS = "UA-132141387-1"

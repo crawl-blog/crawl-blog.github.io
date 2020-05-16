@@ -1,7 +1,8 @@
 Title: parselcli - css and xpath selectors in your terminal!
 Date: 2019-03-28
 Tags: python, parsel, parsing
-summary: I'd like to introduce `parselcli` an command line application for evaluating css and xpath selectors in your terminal.
+Slug: parsecli
+Summary: I'd like to introduce `parselcli` an command line application for evaluating css and xpath selectors in your terminal.
 
 Building html parser can be quite time consuming and often complicated. [parsel](https://github.com/scrapy/parsel) is a python library for parsing html with css or xpath selectors, while [parselcli](https://github.com/Granitosaurus/parsel-cli) is an interactive shell wrapper around it.
 

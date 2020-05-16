@@ -420,6 +420,8 @@ div.page-container {
 
     div.tags {
         padding: 20px;
+        text-align: right;
+        align-self: center;
 
         @media #{$media-md} {
             padding: 0;

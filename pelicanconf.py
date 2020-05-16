@@ -49,3 +49,8 @@ SHORTCODES = {
     'mp4gif': """<video width="480" height="240" autoplay loop muted title="{{desc}}"><source src="/video/{{src}}" type="video/mp4"></video><figcaption>{{desc}}</figcaption>"""
 
 }
+
+# comments
+UTTERANCES_REPO = 'crawl-blog/crawl-blog.github.io'
+APPLAUSE_BUTTON = True
+GOOGLE_ANALYTICS = "UA-132141387-1"

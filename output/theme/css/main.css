@@ -63,7 +63,6 @@ div.post-content, div.entry-content {
     @media screen and (min-width: 35.5em) {
       div.post-content hr, div.entry-content hr {
         width: 50%; } }
-
 div.navigation {
   text-align: left;
   max-width: 1000px;
@@ -250,7 +249,9 @@ div.page-container {
           border-radius: 3px;
           margin-right: 10px; }
   div.page-container div.tags {
-    padding: 20px; }
+    padding: 20px;
+    text-align: right;
+    align-self: center; }
     @media screen and (min-width: 48em) {
       div.page-container div.tags {
         padding: 0; } }
@@ -305,13 +306,11 @@ div.article-header-container div.background-image-container div.background-image
     @media screen and (min-width: 35.5em) {
       div.article-header-container div.background-image-container div.background-image img {
         height: 100%; } }
-
 div.article-header-container div.background-image-container div.background-image-small img {
   max-width: 90%; }
   @media screen and (min-width: 48em) {
     div.article-header-container div.background-image-container div.background-image-small img {
       max-width: 80%; } }
-
 div.article-header-container div.background-image-container div.background-image-small div.title-container {
   width: 100%;
   margin: 20px auto;
@@ -337,7 +336,6 @@ div.article-header-container div.background-image-container div.background-image
     @media screen and (min-width: 35.5em) {
       div.article-header-container div.background-image-container div.background-image-small div.title-container h4 {
         font-size: 32px; } }
-
 .italics {
   font-style: italic; }
 
@@ -450,7 +448,6 @@ div.author-page-header div.cover {
   @media screen and (min-width: 48em) {
     div.author-page-header div.cover {
       height: 400px; } }
-
 div.author-page-header div.avatar, div.author-page-header div.avatar-no-cover {
   display: inline-block;
   width: 120px;

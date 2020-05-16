@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>🕷 crawl.blog</title><link href="/" rel="alternate"></link><link href="%F0%9F%95%B7%20crawl.blog/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2019-03-28T00:00:00+01:00</updated><entry><title>parselcli - css and xpath selectors in your terminal!</title><link href="/parselcli-css-and-xpath-selectors-in-your-terminal.html" rel="alternate"></link><published>2019-03-28T00:00:00+01:00</published><updated>2019-03-28T00:00:00+01:00</updated><author><name>granitosaurus</name></author><id>tag:None,2019-03-28:/parselcli-css-and-xpath-selectors-in-your-terminal.html</id><summary type="html">&lt;p&gt;I'd like to introduce &lt;code&gt;parselcli&lt;/code&gt; an command line application for evaluating css and xpath selectors in your terminal.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Building html parser can be quite time consuming and often complicated. &lt;a href="https://github.com/scrapy/parsel"&gt;parsel&lt;/a&gt; is a python library for parsing html with css or xpath selectors, while &lt;a href="https://github.com/Granitosaurus/parsel-cli"&gt;parselcli&lt;/a&gt; is an interactive shell wrapper around it.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Disclaimer: I wrote parselcli&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;In short &lt;code&gt;parselcli&lt;/code&gt; allows you to do this:&lt;/p&gt;
+&lt;script id="asciicast-234118" src="https://asciinema.org/a/234118.js" async&gt;&lt;/script&gt;
+
+&lt;p&gt;At the moment version 0.31 &lt;code&gt;parselcli&lt;/code&gt; has these features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;css and xpath selectors&lt;/li&gt;
+&lt;li&gt;Auto complete for classes, ids and tags with history (for ptpython shell)&lt;/li&gt;
+&lt;li&gt;Evaluating against cached, live urls or local files (see --cached and --file flags)&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Inline executions:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ parsel &amp;quot;http://httpbin.org/html&amp;quot; -c h1
+[&amp;#39;&lt;span class="nt"&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Herman Melville - Moby-Dick&lt;span class="nt"&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;&amp;#39;]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Supports output processors:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ parsel &lt;span class="s2"&gt;&amp;quot;http://httpbin.org/html&amp;quot;&lt;/span&gt; -c h1::text -p join,len
+&lt;span class="m"&gt;27&lt;/span&gt;
+&lt;span class="c1"&gt;# the h1 text is 27 characters long!&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Supports commands for fast workflow and debuging:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ parsel &lt;span class="s2"&gt;&amp;quot;http://httpbin.org/html&amp;quot;&lt;/span&gt;
+&amp;gt; -help
+available commands &lt;span class="o"&gt;(&lt;/span&gt;use -command&lt;span class="o"&gt;)&lt;/span&gt;:
+  help: show &lt;span class="nb"&gt;help&lt;/span&gt;
+  debug: show debug info
+  embed: start interactive python shell
+  open: open current url in browser tab
+  view: open current html in browser tab
+  fetch: download from new url
+  css: switch to css selectors
+  xpath: switch to xpath selectors
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Fully configurable via &lt;code&gt;~/.config/parsel.toml&lt;/code&gt; file (depending on your &lt;code&gt;$XDG_CONFIG&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Preload embed shell for full python&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ parsel &lt;span class="s2"&gt;&amp;quot;http://httpbin.org/html&amp;quot;&lt;/span&gt; --embed
+&amp;gt;&amp;gt;&amp;gt; dir&lt;span class="o"&gt;()&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;request&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;response&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;sel&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; response.cookies
+&amp;lt;RequestsCookieJar&lt;span class="o"&gt;[]&lt;/span&gt;&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;My Workflow&lt;/h2&gt;
+&lt;p&gt;I build &lt;code&gt;parselcli&lt;/code&gt; to have faster and more convenient workflow for building html parsers.&lt;/p&gt;
+&lt;p&gt;&lt;video width="480" height="240" autoplay loop muted title=""&gt;&lt;source src="/video/spongebob_work.mp4" type="video/mp4"&gt;&lt;/video&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/p&gt;
+&lt;p&gt;First thing I do is find a product/item that has the higher coverage. For example if I'm crawling a clothing shop I look for a product that has all of the fields like variants, colours, sizes and multiple prices. Shoes in often meet this criteria. &lt;br&gt;
+This will be my &lt;em&gt;genesis&lt;/em&gt; html that I will use to build my parser.&lt;/p&gt;
+&lt;p&gt;I pass this url to my &lt;code&gt;parsel&lt;/code&gt; and cache it in case I need to run it again in the future. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ parsel &lt;span class="s2"&gt;&amp;quot;http://httpbin.org/html&amp;quot;&lt;/span&gt; --cache
+using cached version
+&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Afterwards if the website functions without javascript I use &lt;code&gt;-view&lt;/code&gt; command to open up source in my browser or &lt;code&gt;-open&lt;/code&gt; command to open up live url in my browser.  &lt;/p&gt;
+&lt;p&gt;In my browsers (chromium or qutebrowser) I open up inspector and click around html code and identify my css selectors if they are possible, xpath if something more complicated is required.&lt;br&gt;
+I pop my ideas to parsel shell and see how it looks.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;gt; h1::text&lt;/span&gt;
+&lt;span class="err"&gt;[&amp;#39;Herman Melville - Moby-Dick&amp;#39;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If I'm satisfied I save the selectors in my crawler code and move on.&lt;br&gt;
+Quite simple really!&lt;/p&gt;
+&lt;h2&gt;Contribution is Welcome!&lt;/h2&gt;
+&lt;p&gt;Parselcli is still in rather early development but I've been using it &lt;em&gt;in production&lt;/em&gt; for a while now. Nevertheless any contributions are welcome!&lt;/p&gt;
+&lt;p&gt;&lt;a href="/img/parselcli_releases.png"&gt;&lt;img src="/img/parselcli_releases.png" title=""&gt;&lt;/img&gt;&lt;/a&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/p&gt;
+&lt;p&gt;https://github.com/Granitosaurus/parsel-cli&lt;/p&gt;</content><category term="tools"></category><category term="python"></category><category term="parsel"></category><category term="parsing"></category></entry><entry><title>Scrapy: How to loop a crawler</title><link href="/scrapy-loop.html" rel="alternate"></link><published>2019-03-28T00:00:00+01:00</published><updated>2019-03-28T00:00:00+01:00</updated><author><name>granitosaurus</name></author><id>tag:None,2019-03-28:/scrapy-loop.html</id><summary type="html">&lt;p&gt;Explore ways to properly loop scrapy crawlers with twisted callbacks.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Running scrapy crawlers from a script is not difficult, however things start to get more complicated once additional logic needs to be injected. Like if you want to run crawler in an endless loop!&lt;/p&gt;
+&lt;p&gt;&lt;a href="/img/ouroboros.gif"&gt;&lt;img src="/img/ouroboros.gif" title=""&gt;&lt;/img&gt;&lt;/a&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/p&gt;
+&lt;p&gt;There are a lot of ways to do this but by since scrapy is using Twisted for crawl loop you can extend the same loop with your on callbacks and errorbacks.
+This is how you run scrapy with a script:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;scrapy&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;scrapy.crawler&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;CrawlerProcess&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;scrapy.utils.project&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;get_project_settings&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MySpider&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;scrapy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Spider&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# Your spider definition&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;
+
+&lt;span class="n"&gt;process&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CrawlerProcess&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;get_project_settings&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+&lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;crawl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MySpider&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# the script will block here until the crawling is finished&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The interesting bit here is that &lt;code&gt;process.crawl(MySpider)&lt;/code&gt; actually returns twisted's deferred! We can attach some callbacks to this deferred that will be fired once the crawl finished.
+In other words if we want to have an endless loop we can just add a recursive callback - once crawl finishes, crawl again!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;proc&lt;/span&gt;&lt;span class="nb"&gt;es&lt;/span&gt;&lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;CrawlerProcess&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;get_project_settings&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+&lt;span class="nf"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;_crawl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;sp&lt;/span&gt;&lt;span class="nv"&gt;ider&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nf"&gt;deferred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;process.crawl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;sp&lt;/span&gt;&lt;span class="nv"&gt;ider&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nf"&gt;deferred.addCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;_crawl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;sp&lt;/span&gt;&lt;span class="nv"&gt;ider&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nf"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;deferred&lt;/span&gt;
+
+&lt;span class="nf"&gt;_crawl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;Myspider&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;proc&lt;/span&gt;&lt;span class="nb"&gt;es&lt;/span&gt;&lt;span class="nv"&gt;s.start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now once crawl finished another will start immediately!&lt;/p&gt;
+&lt;h3&gt;Improvements&lt;/h3&gt;
+&lt;p&gt;We can still improve on this. First we can &lt;strong&gt;add a sleep&lt;/strong&gt; between calls for cases where we want to run crawler only so often.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;twisted.internet&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;reactor&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;twisted.internet.task&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;deferLater&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Non blocking sleep callback&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;deferLater&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;reactor&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;process&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CrawlerProcess&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;get_project_settings&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_crawl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;spider&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;deferred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;crawl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;spider&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;deferred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;results&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;waiting 100 seconds before restart...&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;deferred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;deferred&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_crawl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;spider&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;deferred&lt;/span&gt;
+
+
+&lt;span class="n"&gt;_crawl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;MySpider&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Finally we should &lt;strong&gt;handle crashes&lt;/strong&gt;. For this we can use errorbacks which will be called if an unhandled exception happens:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;def&lt;/span&gt; &lt;span class="n"&gt;crash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;failure&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;oops, spider crashed&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;failure&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getTraceback&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+&lt;span class="n"&gt;def&lt;/span&gt; &lt;span class="n"&gt;_crawl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;spider&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;deferred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;crawl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;spider&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;deferred&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;results&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;waiting 100 seconds before restart...&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;deferred&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addErrback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;crash&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="c1"&gt;-- add errback here&lt;/span&gt;
+    &lt;span class="k"&gt;deferred&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;deferred&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_crawl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;spider&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;deferred&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here if crawler crashes we'll print a message and close the process.&lt;/p&gt;
+&lt;h3&gt;More Ideas&lt;/h3&gt;
+&lt;p&gt;You can add as many &lt;code&gt;Errbacks&lt;/code&gt; and &lt;code&gt;Callbacks&lt;/code&gt; as you want and you can get quite creative with this approach. Send a slack message, check crawler stats, maybe even chain multiple different crawlers!&lt;/p&gt;
+&lt;h3&gt;Full Implementations&lt;/h3&gt;
+&lt;p&gt;I wrote a small example with full capabilities like logging, configured intervals and hooks that I used in production with great success.&lt;br&gt;
+Check out &lt;a href="https://gitlab.com/granitosaurus/scrapy-loop"&gt;scrapy-loop on gitlab&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h5&gt;Attributions&lt;/h5&gt;
+&lt;p&gt;The beautiful ouroboros gif is provided by &lt;a href="http://akhildakinedi.com/"&gt;Akhil Dakinedi&lt;/a&gt;&lt;/p&gt;</content><category term="guides"></category><category term="scrapy"></category><category term="python"></category></entry><entry><title>Why Do We Crawl The Web?</title><link href="/why-do-we-crawl.html" rel="alternate"></link><published>2019-01-19T00:00:00+01:00</published><updated>2019-01-19T00:00:00+01:00</updated><author><name>granitosaurus</name></author><id>tag:None,2019-01-19:/why-do-we-crawl.html</id><summary type="html">&lt;p&gt;Why do we crawl websites? What projects are being born from gathered public data and how can that help a business or society as a whole?&lt;/p&gt;</summary><content type="html">&lt;p&gt;Whenever people ask me what I do for a living it's a bit hard to explain. People are no longer satisfied with "I'm a programmer" and often they follow up with a question: "What do you program?". "I write programs that retrieve data from websites" is usually enough for an answer but I feel that people don't really understand &lt;em&gt;why&lt;/em&gt; someone would want that.&lt;/p&gt;
+&lt;p&gt;A lot of new programmers often struggle with project ideas and the biggest bootstrap you can get is data. There are public data sets but they are often boring and dated - what really kickstarts a project is real time, fresh and juicy information!&lt;/p&gt;
+&lt;p&gt;The point of this particular entry is to cover these two cases: explain the industry and provide pointers for crawling projects.&lt;/p&gt;
+&lt;h1&gt;Trade Listings&lt;/h1&gt;
+&lt;p&gt;One of the most common crawling subjects are just trade listings. Whether it's ebay, craiglist, car dealerships or job offers - it's valuable data and interesting data that can bootstrap so many ideas!&lt;/p&gt;
+&lt;p&gt;My most common beginner project idea for students is making a notification crawler - a crawler that would crawl something and email, twitter or push notification to a phone when some condition is met.&lt;/p&gt;
+&lt;p&gt;&lt;a href="/img/listings.png"&gt;&lt;img src="/img/listings.png" title=""&gt;&lt;/img&gt;&lt;/a&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/p&gt;
+&lt;p&gt;For example I'm looking for a used Honda Civic that is no older than 10 years and is color blue. Also turns out that relatively recent blue Honda Civics are in high demand, so I want to know about it ASAP. Here a web-crawler performs a perfect function. Check the website every 5 minutes for Blue Honda Civic listings and if there's something pop an email!&lt;/p&gt;
+&lt;p&gt;&lt;a href="/img/data-board.svg"&gt;&lt;img src="/img/data-board.svg" title="turns out honda civic might not be a good investment after all"&gt;&lt;/img&gt;&lt;/a&gt;&lt;figcaption&gt;turns out honda civic might not be a good investment after all&lt;/figcaption&gt;&lt;/p&gt;
+&lt;p&gt;Even more common usage for listing crawlers is just to hoard data for marketing and data analysis. A lot of wise decisions can be made by looking at historic trends, be it your competition or just general market.&lt;/p&gt;
+&lt;h1&gt;E-commerce&lt;/h1&gt;
+&lt;p&gt;It's almost identical case as trade listings - mostly crawled for marketing or tracking. This is probably the most common crawler type in the industry as there's huge demand for product data - observing competition is vital part of any marketing.&lt;/p&gt;
+&lt;p&gt;&lt;a href="/img/ecommerce.svg"&gt;&lt;img src="/img/ecommerce.svg" title="I can see what you're doing!"&gt;&lt;/img&gt;&lt;/a&gt;&lt;figcaption&gt;I can see what you're doing!&lt;/figcaption&gt;&lt;/p&gt;
+&lt;p&gt;Not only that but companies are also interested in how well their own products are doing. I've worked on projects that offer services for brands an overview of their products by crawling a bunch of their retailers for reviews, pricing and whether the retailers aren't breaking any agreements. These types of services have been rising in popularity lately.&lt;/p&gt;
+&lt;h1&gt;Leads&lt;/h1&gt;
+&lt;p&gt;You've probably heard this term before and discarded it as one of those marketing words that everyone uses but nobody knows what it means. Well you're kinda right - leads can mean so many things, but it's a very popular subject for web crawling and it usually means &lt;em&gt;marketing target or object&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;This information is on high demand as it's extremely useful for marketing and general statistics. You'd like to know all companies located in US, Texas that work in video game industry? People that have github and gitlab accounts so you can do gitlab migration statistics?&lt;/p&gt;
+&lt;p&gt;&lt;a href="/img/boss.svg"&gt;&lt;img src="/img/boss.svg" title="Oddly specific but I think we can crawl that"&gt;&lt;/img&gt;&lt;/a&gt;&lt;figcaption&gt;Oddly specific but I think we can crawl that&lt;/figcaption&gt;&lt;/p&gt;
+&lt;p&gt;The possibilities are &lt;em&gt;endless&lt;/em&gt; for marketing and various sciency activities. Crawlers in this medium also tend to be quite challenging because of the sheer scale of the projects.&lt;/p&gt;
+&lt;h1&gt;Humanitarian Causes&lt;/h1&gt;
+&lt;p&gt;If there's data there's probably some way to use that data to improve our society!&lt;/p&gt;
+&lt;p&gt;&lt;a href="/img/scientist.svg"&gt;&lt;img src="/img/scientist.svg" title="if scientists had access to web-crawling"&gt;&lt;/img&gt;&lt;/a&gt;&lt;figcaption&gt;if scientists had access to web-crawling&lt;/figcaption&gt;&lt;/p&gt;
+&lt;p&gt;Unfortunately this is still a developing medium in web crawling, but there's a lot of potential to bring real change through web-crawling. The biggest issue is that people just are afraid to create and share such datasets and crawlers because of the absurd copyright laws and aggressive behaviour by the data source companies. Fortunately cases against crawlers never win in the actual court but the fear of &lt;em&gt;going&lt;/em&gt; to court is often enough of a deterrent to stop any sort of public crawlers.&lt;/p&gt;
+&lt;p&gt;Various government and charity organizations need data and often the domains either refuse to provide it, charge ludicrous prices or the subject just covers hundreds of domains making it just easier and more efficient to crawl the data.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;One of the most interested cases I've been brought to was crawling of various escort forums in USA to gather escort data to detect human trafficking.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;All that being said there's still a movement for &lt;strong&gt;public datasets&lt;/strong&gt; - crawled data that is shared publicly for various open projects.&lt;/p&gt;
+&lt;p&gt;&lt;a href="/img/all_welcome.svg"&gt;&lt;img src="/img/all_welcome.svg" title="open data set guys are like knowledge sharing buddhas &amp;lt;3"&gt;&lt;/img&gt;&lt;/a&gt;&lt;figcaption&gt;open data set guys are like knowledge sharing buddhas &amp;lt;3&lt;/figcaption&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://commoncrawl.org/the-data/"&gt;commoncrawl.org&lt;/a&gt; - The biggest open data set on website raw data, text and metadata extract.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.sajari.com/public-data"&gt;sajari.com/public-data&lt;/a&gt; - Curated list of public data sets from various sources.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Real Time Data&lt;/h1&gt;
+&lt;p&gt;The most common form of crawling in &lt;strong&gt;applications&lt;/strong&gt; is crawling of real time data. Common example would be a sports match crawler that would crawl match data. These types of crawlers are very popular in floss as the apps tend to be self sufficient (don't need central service). The biggest real time crawler would be &lt;code&gt;youtube-dl&lt;/code&gt; which crawls many media pages and parses them for direct media sources.&lt;/p&gt;
+&lt;p&gt;This is also a great medium for beginners since it avoids the complex parts of crawling that is asynchronous logic and crawler scaling. A task I often recommend for beginners is usually sports notification crawler - crawling sports data and notifying about results via email or push notification.&lt;/p&gt;
+&lt;p&gt;&lt;a href="/img/dood.svg"&gt;&lt;img src="/img/dood.svg" title="spiders can be like your personal assistants!"&gt;&lt;/img&gt;&lt;/a&gt;&lt;figcaption&gt;spiders can be like your personal assistants!&lt;/figcaption&gt;&lt;/p&gt;
+&lt;h1&gt;Meta Crawling&lt;/h1&gt;
+&lt;p&gt;By far the most common industry crawling is meta crawling: google, microsoft, amazon - every big data company does some sort of meta crawling. Unfortunately it's by far the most boring niche and it rarely has any application outside from mega corporation indexing things and little widgets (like url previews you get in messaging applications).&lt;/p&gt;
+&lt;h1&gt;Data!&lt;/h1&gt;
+&lt;p&gt;These are just few broad ideas of what are the uses of web-crawling but there are many more specific applications that I didn't cover, so if you're ever struggling with project idea skim around the web - there's so much amazing public data that you can use to play around or even start a business!&lt;/p&gt;
+&lt;p&gt;Unfortunately the outdated copyright laws and some abusive behaviour by some corporate entities tend to scare people away from this medium and give it a bad name but people shouldn't be deterred of entering this exciting medium!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Spiders are lovely creatures and in general they are a net benefit to our society!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Credits And Licensing&lt;/h2&gt;
+&lt;p&gt;All of the images are made using vector files provided by &lt;a href="http://scvrepo.com"&gt;svgrepo.com&lt;/a&gt; and modified in &lt;a href="http://inkscape.org"&gt;Inkscape&lt;/a&gt;.&lt;/p&gt;</content><category term="research"></category><category term="general"></category><category term="politics"></category><category term="design"></category><category term="industry"></category></entry></feed>

@@ -73,7 +73,7 @@
     <div class="entry-content article">
       <!--insert table of contents between text and first header-->
       <p>Running scrapy crawlers from a script is not difficult, however things start to get more complicated once additional logic needs to be injected. Like if you want to run crawler in an endless loop!</p>
-<p><a href="/img/ouroboros.gif"><img src="/img/ouroboros.gif" title=""></img></a><figcaption></figcaption></p>
+<p><a href="/img/ouroboros.gif"><img src="/img/ouroboros.gif" title=""/></a><figcaption></figcaption></p>
 <p>There are a lot of ways to do this but by since scrapy is using Twisted for crawl loop you can extend the same loop with your on callbacks and errorbacks.
 This is how you run scrapy with a script:</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scrapy</span>
@@ -89,8 +89,6 @@ This is how you run scrapy with a script:</p>
 <span class="n">process</span><span class="o">.</span><span class="n">crawl</span><span class="p">(</span><span class="n">MySpider</span><span class="p">)</span>
 <span class="n">process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span> <span class="c1"># the script will block here until the crawling is finished</span>
 </pre></div>
-
-
 <p>The interesting bit here is that <code>process.crawl(MySpider)</code> actually returns twisted's deferred! We can attach some callbacks to this deferred that will be fired once the crawl finished.
 In other words if we want to have an endless loop we can just add a recursive callback - once crawl finishes, crawl again!</p>
 <div class="highlight"><pre><span></span><span class="k">proc</span><span class="nb">es</span><span class="nv">s</span> <span class="o">=</span> <span class="nv">CrawlerProcess</span><span class="p">(</span><span class="nv">get_project_settings</span><span class="p">())</span>
@@ -103,18 +101,16 @@ In other words if we want to have an endless loop we can just add a recursive ca
 <span class="nf">_crawl</span><span class="p">(</span><span class="nv">None</span><span class="p">,</span> <span class="nv">Myspider</span><span class="p">)</span>
 <span class="k">proc</span><span class="nb">es</span><span class="nv">s.start</span><span class="p">()</span>
 </pre></div>
-
-
 <p>Now once crawl finished another will start immediately!</p>
 
-      <h3>Improvements</h3>
+      <h3 id="improvements">Improvements</h3>
 <p>We can still improve on this. First we can <strong>add a sleep</strong> between calls for cases where we want to run crawler only so often.</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">reactor</span>
 <span class="kn">from</span> <span class="nn">twisted.internet.task</span> <span class="kn">import</span> <span class="n">deferLater</span>
 
 
 <span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">seconds</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Non blocking sleep callback&quot;&quot;&quot;</span>
+    <span class="sd">"""Non blocking sleep callback"""</span>
     <span class="k">return</span> <span class="n">deferLater</span><span class="p">(</span><span class="n">reactor</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span>
 
 
@@ -123,7 +119,7 @@ In other words if we want to have an endless loop we can just add a recursive ca
 
 <span class="k">def</span> <span class="nf">_crawl</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
     <span class="n">deferred</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">crawl</span><span class="p">(</span><span class="n">spider</span><span class="p">)</span>
-    <span class="n">deferred</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="k">lambda</span> <span class="n">results</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s1">&#39;waiting 100 seconds before restart...&#39;</span><span class="p">))</span>
+    <span class="n">deferred</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="k">lambda</span> <span class="n">results</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s1">'waiting 100 seconds before restart...'</span><span class="p">))</span>
     <span class="n">deferred</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">sleep</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">deferred</span><span class="o">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">_crawl</span><span class="p">,</span> <span class="n">spider</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">deferred</span>
@@ -132,31 +128,27 @@ In other words if we want to have an endless loop we can just add a recursive ca
 <span class="n">_crawl</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">MySpider</span><span class="p">)</span>
 <span class="n">process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </pre></div>
-
-
 <p>Finally we should <strong>handle crashes</strong>. For this we can use errorbacks which will be called if an unhandled exception happens:</p>
 <div class="highlight"><pre><span></span><span class="n">def</span> <span class="n">crash</span><span class="p">(</span><span class="n">failure</span><span class="p">):</span>
-    <span class="n">print</span><span class="p">(</span><span class="s1">&#39;oops, spider crashed&#39;</span><span class="p">)</span>
+    <span class="n">print</span><span class="p">(</span><span class="s1">'oops, spider crashed'</span><span class="p">)</span>
     <span class="n">print</span><span class="p">(</span><span class="n">failure</span><span class="p">.</span><span class="n">getTraceback</span><span class="p">())</span>
 
 <span class="n">def</span> <span class="n">_crawl</span><span class="p">(</span><span class="k">result</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
     <span class="k">deferred</span> <span class="o">=</span> <span class="n">process</span><span class="p">.</span><span class="n">crawl</span><span class="p">(</span><span class="n">spider</span><span class="p">)</span>
-    <span class="k">deferred</span><span class="p">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">lambda</span> <span class="n">results</span><span class="p">:</span> <span class="n">print</span><span class="p">(</span><span class="s1">&#39;waiting 100 seconds before restart...&#39;</span><span class="p">))</span>
+    <span class="k">deferred</span><span class="p">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">lambda</span> <span class="n">results</span><span class="p">:</span> <span class="n">print</span><span class="p">(</span><span class="s1">'waiting 100 seconds before restart...'</span><span class="p">))</span>
     <span class="k">deferred</span><span class="p">.</span><span class="n">addErrback</span><span class="p">(</span><span class="n">crash</span><span class="p">)</span>  <span class="o">#</span> <span class="o">&lt;</span><span class="c1">-- add errback here</span>
     <span class="k">deferred</span><span class="p">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">sleep</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="k">deferred</span><span class="p">.</span><span class="n">addCallback</span><span class="p">(</span><span class="n">_crawl</span><span class="p">,</span> <span class="n">spider</span><span class="p">)</span>
     <span class="k">return</span> <span class="k">deferred</span>
 </pre></div>
-
-
 <p>Here if crawler crashes we'll print a message and close the process.</p>
-<h3>More Ideas</h3>
+<h3 id="more ideas">More Ideas</h3>
 <p>You can add as many <code>Errbacks</code> and <code>Callbacks</code> as you want and you can get quite creative with this approach. Send a slack message, check crawler stats, maybe even chain multiple different crawlers!</p>
-<h3>Full Implementations</h3>
-<p>I wrote a small example with full capabilities like logging, configured intervals and hooks that I used in production with great success.<br>
+<h3 id="full implementations">Full Implementations</h3>
+<p>I wrote a small example with full capabilities like logging, configured intervals and hooks that I used in production with great success.<br/>
 Check out <a href="https://gitlab.com/granitosaurus/scrapy-loop">scrapy-loop on gitlab</a></p>
-<hr>
-<h5>Attributions</h5>
+<hr/>
+<h5 id="attributions">Attributions</h5>
 <p>The beautiful ouroboros gif is provided by <a href="http://akhildakinedi.com/">Akhil Dakinedi</a></p>
     </div>
     <div class="entry-content footer">
@@ -209,5 +201,7 @@ Check out <a href="https://gitlab.com/granitosaurus/scrapy-loop">scrapy-loop on 
       ga('send', 'pageview');
 
     </script>
+  <script data-goatcounter="https://crawl-blog.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

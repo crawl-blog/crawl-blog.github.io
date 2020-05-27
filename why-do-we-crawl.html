@@ -80,49 +80,49 @@
 <p>A lot of new programmers often struggle with project ideas and the biggest bootstrap you can get is data. There are public data sets but they are often boring and dated - what really kickstarts a project is real time, fresh and juicy information!</p>
 <p>The point of this particular entry is to cover these two cases: explain the industry and provide pointers for crawling projects.</p>
 
-      <h1>Trade Listings</h1>
+      <h1 id="trade listings">Trade Listings</h1>
 <p>One of the most common crawling subjects are just trade listings. Whether it's ebay, craiglist, car dealerships or job offers - it's valuable data and interesting data that can bootstrap so many ideas!</p>
 <p>My most common beginner project idea for students is making a notification crawler - a crawler that would crawl something and email, twitter or push notification to a phone when some condition is met.</p>
-<p><a href="/img/listings.png"><img src="/img/listings.png" title=""></img></a><figcaption></figcaption></p>
+<p><a href="/img/listings.png"><img src="/img/listings.png" title=""/></a><figcaption></figcaption></p>
 <p>For example I'm looking for a used Honda Civic that is no older than 10 years and is color blue. Also turns out that relatively recent blue Honda Civics are in high demand, so I want to know about it ASAP. Here a web-crawler performs a perfect function. Check the website every 5 minutes for Blue Honda Civic listings and if there's something pop an email!</p>
-<p><a href="/img/data-board.svg"><img src="/img/data-board.svg" title="turns out honda civic might not be a good investment after all"></img></a><figcaption>turns out honda civic might not be a good investment after all</figcaption></p>
+<p><a href="/img/data-board.svg"><img src="/img/data-board.svg" title=""/></a><figcaption>turns out honda civic might not be a good investment after all</figcaption></p>
 <p>Even more common usage for listing crawlers is just to hoard data for marketing and data analysis. A lot of wise decisions can be made by looking at historic trends, be it your competition or just general market.</p>
-<h1>E-commerce</h1>
+<h1 id="e-commerce">E-commerce</h1>
 <p>It's almost identical case as trade listings - mostly crawled for marketing or tracking. This is probably the most common crawler type in the industry as there's huge demand for product data - observing competition is vital part of any marketing.</p>
-<p><a href="/img/ecommerce.svg"><img src="/img/ecommerce.svg" title="I can see what you're doing!"></img></a><figcaption>I can see what you're doing!</figcaption></p>
+<p><a href="/img/ecommerce.svg"><img src="/img/ecommerce.svg" title=""/></a><figcaption>I can see what you're doing!</figcaption></p>
 <p>Not only that but companies are also interested in how well their own products are doing. I've worked on projects that offer services for brands an overview of their products by crawling a bunch of their retailers for reviews, pricing and whether the retailers aren't breaking any agreements. These types of services have been rising in popularity lately.</p>
-<h1>Leads</h1>
+<h1 id="leads">Leads</h1>
 <p>You've probably heard this term before and discarded it as one of those marketing words that everyone uses but nobody knows what it means. Well you're kinda right - leads can mean so many things, but it's a very popular subject for web crawling and it usually means <em>marketing target or object</em>.</p>
 <p>This information is on high demand as it's extremely useful for marketing and general statistics. You'd like to know all companies located in US, Texas that work in video game industry? People that have github and gitlab accounts so you can do gitlab migration statistics?</p>
-<p><a href="/img/boss.svg"><img src="/img/boss.svg" title="Oddly specific but I think we can crawl that"></img></a><figcaption>Oddly specific but I think we can crawl that</figcaption></p>
+<p><a href="/img/boss.svg"><img src="/img/boss.svg" title=""/></a><figcaption>Oddly specific but I think we can crawl that</figcaption></p>
 <p>The possibilities are <em>endless</em> for marketing and various sciency activities. Crawlers in this medium also tend to be quite challenging because of the sheer scale of the projects.</p>
-<h1>Humanitarian Causes</h1>
+<h1 id="humanitarian causes">Humanitarian Causes</h1>
 <p>If there's data there's probably some way to use that data to improve our society!</p>
-<p><a href="/img/scientist.svg"><img src="/img/scientist.svg" title="if scientists had access to web-crawling"></img></a><figcaption>if scientists had access to web-crawling</figcaption></p>
+<p><a href="/img/scientist.svg"><img src="/img/scientist.svg" title=""/></a><figcaption>if scientists had access to web-crawling</figcaption></p>
 <p>Unfortunately this is still a developing medium in web crawling, but there's a lot of potential to bring real change through web-crawling. The biggest issue is that people just are afraid to create and share such datasets and crawlers because of the absurd copyright laws and aggressive behaviour by the data source companies. Fortunately cases against crawlers never win in the actual court but the fear of <em>going</em> to court is often enough of a deterrent to stop any sort of public crawlers.</p>
 <p>Various government and charity organizations need data and often the domains either refuse to provide it, charge ludicrous prices or the subject just covers hundreds of domains making it just easier and more efficient to crawl the data.</p>
 <blockquote>
 <p>One of the most interested cases I've been brought to was crawling of various escort forums in USA to gather escort data to detect human trafficking.</p>
 </blockquote>
 <p>All that being said there's still a movement for <strong>public datasets</strong> - crawled data that is shared publicly for various open projects.</p>
-<p><a href="/img/all_welcome.svg"><img src="/img/all_welcome.svg" title="open data set guys are like knowledge sharing buddhas &lt;3"></img></a><figcaption>open data set guys are like knowledge sharing buddhas &lt;3</figcaption></p>
+<p><a href="/img/all_welcome.svg"><img src="/img/all_welcome.svg" title=""/></a><figcaption>open data set guys are like knowledge sharing buddhas &lt;3</figcaption></p>
 <ul>
 <li><a href="http://commoncrawl.org/the-data/">commoncrawl.org</a> - The biggest open data set on website raw data, text and metadata extract.</li>
 <li><a href="https://www.sajari.com/public-data">sajari.com/public-data</a> - Curated list of public data sets from various sources.</li>
 </ul>
-<h1>Real Time Data</h1>
+<h1 id="real time data">Real Time Data</h1>
 <p>The most common form of crawling in <strong>applications</strong> is crawling of real time data. Common example would be a sports match crawler that would crawl match data. These types of crawlers are very popular in floss as the apps tend to be self sufficient (don't need central service). The biggest real time crawler would be <code>youtube-dl</code> which crawls many media pages and parses them for direct media sources.</p>
 <p>This is also a great medium for beginners since it avoids the complex parts of crawling that is asynchronous logic and crawler scaling. A task I often recommend for beginners is usually sports notification crawler - crawling sports data and notifying about results via email or push notification.</p>
-<p><a href="/img/dood.svg"><img src="/img/dood.svg" title="spiders can be like your personal assistants!"></img></a><figcaption>spiders can be like your personal assistants!</figcaption></p>
-<h1>Meta Crawling</h1>
+<p><a href="/img/dood.svg"><img src="/img/dood.svg" title=""/></a><figcaption>spiders can be like your personal assistants!</figcaption></p>
+<h1 id="meta crawling">Meta Crawling</h1>
 <p>By far the most common industry crawling is meta crawling: google, microsoft, amazon - every big data company does some sort of meta crawling. Unfortunately it's by far the most boring niche and it rarely has any application outside from mega corporation indexing things and little widgets (like url previews you get in messaging applications).</p>
-<h1>Data!</h1>
+<h1 id="data!">Data!</h1>
 <p>These are just few broad ideas of what are the uses of web-crawling but there are many more specific applications that I didn't cover, so if you're ever struggling with project idea skim around the web - there's so much amazing public data that you can use to play around or even start a business!</p>
 <p>Unfortunately the outdated copyright laws and some abusive behaviour by some corporate entities tend to scare people away from this medium and give it a bad name but people shouldn't be deterred of entering this exciting medium!</p>
 <blockquote>
 <p>Spiders are lovely creatures and in general they are a net benefit to our society!</p>
 </blockquote>
-<h2>Credits And Licensing</h2>
+<h2 id="credits and licensing">Credits And Licensing</h2>
 <p>All of the images are made using vector files provided by <a href="http://scvrepo.com">svgrepo.com</a> and modified in <a href="http://inkscape.org">Inkscape</a>.</p>
     </div>
     <div class="entry-content footer">
@@ -177,5 +177,7 @@
       ga('send', 'pageview');
 
     </script>
+  <script data-goatcounter="https://crawl-blog.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

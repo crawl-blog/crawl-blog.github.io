@@ -193,7 +193,9 @@ a.tag {
   list-style-type: circle; }
 
 figcaption {
-  text-align: center; }
+  text-align: center;
+  font-size: smaller;
+  color: slategrey; }
 
 div.page-container {
   text-align: center;

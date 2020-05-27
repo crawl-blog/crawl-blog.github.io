@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>How to discover web scraping targets?</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fork-awesome/1.1.7/css/fork-awesome.min.css">
+        <link rel="stylesheet" href="http://crawl.blog/theme/css/main.css" />
+        <link href="🕷 crawl.blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="🕷 crawl.blog Full Atom Feed" />
+        <link href="🕷 crawl.blog/atom.xml" type="application/atom+xml" rel="alternate" title="🕷 crawl.blog Atom Feed" />
+        <link href="🕷 crawl.blog/rss.xml" type="application/rss+xml" rel="alternate" title="🕷 crawl.blog RSS Feed" />
+        <link href="🕷 crawl.blog/feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="🕷 crawl.blog Categories Atom Feed" />
+
+  <meta name="author" content="granitosaurus"/>
+  <meta name="description" content="Finding all scrape targets can be a difficult and tedious process. In this post we&#39;ll cover main target (e.g. product) discovery techniques. In other words: how do you find all of the products on the website?"/>
+<meta property="og:site_name" content="🕷 crawl.blog"/>
+<meta property="og:title" content="How to discover web scraping targets?"/>
+<meta property="og:description" content="Finding all scrape targets can be a difficult and tedious process. In this post we&#39;ll cover main target (e.g. product) discovery techniques. In other words: how do you find all of the products on the website?"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://crawl.blog/drafts/discovery.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-05-16 00:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://crawl.blog/author/granitosaurus.html">
+<meta property="article:section" content="guides"/>
+<meta property="article:tag" content="techniques"/>
+<meta property="og:image" content="">
+        <link rel="stylesheet" href="http://crawl.blog/theme/css/applause-button.css" />
+          <script src="http://crawl.blog/theme/js/applause-button.js"></script>
+</head>
+<body>
+
+    <div class="navigation pure-menu pure-menu-horizontal pure-menu-scrollable">
+        <a href="http://crawl.blog/" class="pure-menu-heading  pure-menu-link">🕷 crawl.blog</a>
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item"></li>
+              <li class="pure-menu-item"><a href="http://crawl.blog/pages/about.html" class="pure-menu-link">about</a></li>
+              <li class="pure-menu-item"><a href="http://crawl.blog/category/guides.html" class="pure-menu-link">guides</a></li>
+              <li class="pure-menu-item"><a href="http://crawl.blog/category/research.html" class="pure-menu-link">research</a></li>
+              <li class="pure-menu-item"><a href="http://crawl.blog/category/tools.html" class="pure-menu-link">tools</a></li>
+              <li class="pure-menu-item pure-menu-selected">
+                <a href="atom.xml" class="pure-menu-link">
+                  <i class="fa fa-rss" aria-hidden="true"></i>
+                </a>
+              </li>
+        </ul>
+    </div>
+  <div class="page-container">
+  <div class="entry-content">
+    <div class="post-meta pure-g">
+
+<div class="pure-u-3-4 meta-data">
+    <a href="http://crawl.blog/category/guides.html" class="category">guides</a>
+    &mdash; <span title="2020-05-16T00:00:00+02:00">Sat 16 May 2020</span></br>
+    <a href="http://crawl.blog/tag/techniques" class="tag">techniques</a>
+    </br>
+</div>    </div>
+  </div>
+
+  <div class="article-header-container">
+    <div class="background-image-container title">
+
+        <div class="background-image-small">
+          <div class="title-container">
+            <h1>How to discover web scraping targets?</h1>
+          </div>
+        </div>
+    </div>
+    <div class="entry-content article">
+      <!--insert table of contents between text and first header-->
+      <p>Finding all scrape targets can be a difficult and tedious process. In this post we'll cover main target (e.g. product) discovery techniques. In other words: how do you find all of the products on the website?</p>
+<p>Let's imagine a web-scraping scenario: you want to scrape all products on an e-commerce website. Well first we need to find urls to the product pages themselves, let's see what are the ways to do that.</p>
+
+        <hr>
+        <div class="pure-u">
+          <div id="toc"><ul><li><a class="toc-href" href="#" title="How to discover web scraping targets?">How to discover web scraping targets?</a><ul><li><a class="toc-href" href="#deep crawling - the hammer approach" title="Deep Crawling - The Hammer Approach">Deep Crawling - The Hammer Approach</a></li><li><a class="toc-href" href="#robots.txt and sitemaps" title="Robots.txt and Sitemaps">Robots.txt and Sitemaps</a></li><li><a class="toc-href" href="#search field" title="Search Field">Search Field</a><ul><li><a class="toc-href" href="#limitations" title="Limitations">Limitations</a></li></ul></li><li><a class="toc-href" href="#creative hacking_1" title="Creative Hacking">Creative Hacking</a><ul><li><a class="toc-href" href="#search by id" title="Search by id">Search by id</a></li><li><a class="toc-href" href="#link exploring" title="Link Exploring">Link Exploring</a></li><li><a class="toc-href" href="#search engines" title="Search Engines">Search Engines</a></li><li><a class="toc-href" href="#asking for help" title="Asking for Help">Asking for Help</a></li></ul></li><li><a class="toc-href" href="#attributions_1" title="Attributions">Attributions</a></li></ul></li></ul></div>
+        </div>
+        <hr>
+      <h2 id="deep crawling - the hammer approach">Deep Crawling - The Hammer Approach</h2>
+<p>First obvious method would be just to start a crawler on homepage and crawl all of the links on the front page, then crawl all of the links on those pages and keep digging deeper and deeper.  </p>
+<p>On paper this sounds like a great approach to find all of the products but in reality this is an extremely inefficient method as you'll end up crawling all of the web pages instead of only what you want.  </p>
+<p><a href="/img/hammer-spider.svg"><img src="/img/hammer-spider.svg" title=""/></a><figcaption>hammers are cool in a battlefield but aren't very friendly otherwise</figcaption></p>
+<p>Furthermore this doesn't guarantee full coverage either:</p>
+<ul>
+<li>Links can be javascript generated - meaning without executing javascript our crawler will not find any product links.  </li>
+<li>Links can simply be not present because the website might not want users finding them. e.g. old clothes collection should not steal the thunder from the new collection.</li>
+<li>Your crawler might fail to handle some edge cases like malformed or corrupted links.</li>
+</ul>
+<p>Finally there's resource issues:</p>
+<ul>
+<li>If websites have rate limits you'll reach them quicker and burn through proxies unnecessarily. </li>
+<li>More crawling means more resources wasted by your and by your target website.</li>
+</ul>
+<p>Needless to say this method has much more negatives than positives. That being said it might be the only option when broad crawling unknown targets.</p>
+<h2 id="robots.txt and sitemaps">Robots.txt and Sitemaps</h2>
+<p>Fortunately for us, most websites want to be crawled by search engines and such. Websites often have <code>robots.txt</code> file which instructs crawlers on crawling rules &mdash; what parts of website should be crawled and what parts shouldn't be. We can use robots.txt to discover general site's structure, maybe there's a product page directory or some interesting endpoint?</p>
+<p><a href="/img/robot-map.svg"><img src="/img/robot-map.svg" title=""/></a><figcaption>Terminator should have used a sitemap</figcaption></p>
+<p>The most important thing often found in robots txt is <code>sitemap</code> document, often called <code>sitemap.xml</code>. This document contains direct links to products themselves:</p>
+<div class="highlight"><pre><span></span>Sitemap: https://www.nytimes.com/sitemaps/new/news.xml.gz
+Sitemap: https://www.nytimes.com/sitemaps/new/sitemap.xml.gz
+Sitemap: https://www.nytimes.com/sitemaps/new/wire.xml.gz
+Sitemap: https://www.nytimes.com/sitemaps/new/collections.xml.gz
+Sitemap: https://www.nytimes.com/sitemaps/new/video.xml.gz
+Sitemap: https://www.nytimes.com/sitemaps/new/cooking.xml.gz
+Sitemap: https://www.nytimes.com/sitemaps/www.nytimes.com/2016_election_sitemap.xml.gz
+Sitemap: https://www.nytimes.com/elections/2018/sitemap
+</pre></div>
+<p><figcaption>Here's an example of http://nytimes.com/robots.txt containing all of the sitemap links!</figcaption></p>
+<p>However if neither sitemap or directory is present we can still can find useful information in <code>robots.txt</code> rule set, such as search endpoints, category directories. In other words by knowing the structure of the website we can find ways to discover products:</p>
+<div class="highlight"><pre><span></span>TODO find example
+</pre></div>
+<p>Explain example here</p>
+<p>Using sitemaps is the most efficient way to discover products however it doesn't produce great coverage occasionally. Often sitemaps are not a priority for a website and not every product might end up there.</p>
+<h2 id="search field">Search Field</h2>
+<p>Many modern websites offer a search field for the data items they have. This search field can often be used for discovery purposes by submitting broad queries that return all of the possible results. One way of doing that is just clicking search button without any queries, however that's often not available.</p>
+<p>An alternative common query for finding all results is by searching empty characters, like "space" character or urlencoded space - <code>%20</code>. </p>
+<p>Some examples:</p>
+<p><a href="/img/shein.com-search.png"><img src="/img/shein.com-search.png" title=""/></a><figcaption>here <a href="http://shein.com">http://shein.com</a> when clicking search button will not give you any results, however searching <code>%20</code> will show you the entire catalog!</figcaption></p>
+<p><a href="/img/target.com-search.png"><img src="/img/target.com-search.png" title=""/></a><figcaption><a href="http://target.com">http://target.com</a> doesn't even allow you to click search, however entering <code>%20</code> does the trick once again!</figcaption></p>
+<p>Finally when nothing works it's time to take a look at query itself. Open up network inspector (ctrl+shift+i on most browsers) and network tab should show you the exact query request the website makes when you click search, or even better search for something and click "next page".</p>
+<p>TODO</p>
+<h3 id="limitations">Limitations</h3>
+<p>Search discovery often suffers from one major obstruction - pagination limitation (it's a super villain because it rhymes). In other words even if your search covers all of the possible items some websites has a limit to N number of pages.<br/>
+The only way to get around this is by splitting search based on available filters and search orders.</p>
+<p>For example lets say a website has <code>20_000</code> products. But search is limited to 100 pages of 10 products per page = <code>1000</code> products per search. Even searching empty space we are still limited, how do we solve this?  </p>
+<ol>
+<li>We can do is reverse the ordering, that already doubles the access of our reach. In other words if sorting by date we can get 1000 newest items and 1000 oldest items, that's already <code>2000/20_000</code> - 10% coverage.</li>
+<li>We can split our search into many smaller filtered searches. Often filters by predefined location (country, USA state etc.) are available &mdash; meaning we can split 1 search of <code>2000/20_000</code> results into 50 searches. If this is well spread distribution we might just reach 100% coverage! In other words if every US state has equal amount of products we'll have potential reach of <code>100_000</code> products (<code>2000</code> per state).</li>
+<li>Hack the query. Often search query has some parameters that can be manually changed to have greater reach. One common keyword is <code>page_size</code> which often defaults to 10 or 20, what if we bump it up to a 100? or something silly like <code>-1</code>? we might just get more results!</li>
+<li>Finally when all things fail we can brute force through search queries, like going through all letters of the alphabet plus select filters. In other words search <code>a in France, b in France, aa in France</code>.<br/>
+This is a rather lame approach but can have surprisingly good coverage!</li>
+</ol>
+<p>As long as we have a query endpoint we can find creative ways of queries all possible results!</p>
+<h2 id="creative hacking_1">Creative Hacking</h2>
+<p>The approaches we've described above should cover 90% of website discovery cases for the rest we can still take advantage of some creative solutions to find some products.</p>
+<h3 id="search by id">Search by id</h3>
+<p>Internal product ids are often integer increments. For example first product being id <code>1</code> while the latest one <code>10_431</code>. First we need to find some endpoint that leads us to product page from id, often the product url can take id itself:</p>
+<div class="highlight"><pre><span></span>http://foo.com/product/super-fast-skateboard
+# sometimes can be reached by used id instead of a slug
+http://foo.com/product/619
+</pre></div>
+<p>Other times id can be put into search or some websites microservice such as tooltip popup or some internal api.</p>
+<p>For example in case of Instragram you can find user_ids in various api and graphql endpoints however converting those ids to user handles is quite difficult. Turns out there's a hidden API endpoint for that only for iPhone users!</p>
+<div class="highlight"><pre><span></span>https://i.instagram.com/api/v1/users/{user_id}/info/
+note: this has to be used with iPhone/android user agent string.
+</pre></div>
+<p><figcaption>turns out this is a common question on  <a href="https://stackoverflow.com/questions/38356283#56424242">stackoverflow</a></figcaption></p>
+<p>This approach is highly situational and requires quite a bit of reverse engineering to understand how the target website functions making our hammer approach sound quite reasonable.</p>
+<h3 id="link exploring">Link Exploring</h3>
+<p>There are various security tools for finding links in websites. Sometimes links and structure hints can be found in non-html details of html documents such as scripts and comments. Most basic link exploring addition we could make is regex pattern:</p>
+<div class="highlight"><pre><span></span><span class="c1"># for absolute urls anything after domain until text end</span>
+<span class="sd">'''(website.com/.+?)(?:\s|$|'|")'''</span>
+<span class="c1"># for relative urls same but without domain part</span>
+<span class="sd">'''(/.+?)(?:\s|$|'|")'''</span>
+</pre></div>
+<p>Just using this regex pattern could yield us some urls that we wouldn't find by parsing <code>&lt;a&gt;</code> nodes!</p>
+<p>Another explore prospect is digging up from existing links like media links. Occasionally a photo can hint us to product directory location, for example:</p>
+<div class="highlight"><pre><span></span><span class="c">http://pet-store.com/products123/shrimp-food/kip.jpg</span>
+</pre></div>
+<p>Going up this link could lead us to a product directory &mdash; <code>products123/</code> which might contain list of products.</p>
+<p>Link exploring for well designed modern websites might not do much but as a option it can be surprisingly effective!</p>
+<h3 id="search engines">Search Engines</h3>
+<p>Finally when all things fail we can go looking for help. Don't afraid to look up "website.com product directory" on search engines. </p>
+<p>It's even possible that search engine could have indexed the product pages and still have the link in their database.   </p>
+<p><a href="/img/whip-search-engines.svg"><img src="/img/whip-search-engines.svg" title=""/></a><figcaption>take advantage of the souless search engine business!</figcaption></p>
+<p>For that try <code>site:</code> search flag. For example to find stackoverflow users you could use this query in google, bing or duckduckgo:</p>
+<div class="highlight"><pre><span></span><span class="n">site</span><span class="o">:</span><span class="n">https</span><span class="o">://</span><span class="n">stackoverflow</span><span class="o">.</span><span class="na">com</span><span class="sr">/users/</span>
+</pre></div>
+<p>However most search engines are notoriously hard to crawl (they got their slice of the pie and don't want to share it) so this approach can lead to a lot of headaches.</p>
+<h3 id="asking for help">Asking for Help</h3>
+<p>Finally you can always ask for help. Stackoverflow has a big and passionate <code>#web-scraping</code> community for technical questions and for broader questions like discovery you can chat with us at <a href="https://matrix.to/#/%23web-scraping:matrix.org"><code>#web-scraping</code> channel on the matrix</a></p>
+<hr/>
+<p>That's about it, if some techniques aren't covered here feel free to leave a comment below or get in touch with crawl.blog via one of many social links on the homepage.</p>
+<p>Happy discovering!</p>
+<h2 id="attributions_1">Attributions</h2>
+<p>All of the images are made by using vector files provided by the amazing <a href="http://scvrepo.com">svgrepo.com</a> and put together in <a href="http://inkscape.org">Inkscape</a>. The blog was writen by me, Bernardas Ali&scaron;auskas; link to my personal blog is <a href="http://granitosaurus.rocks">here</a>.  </p>
+<p>Crawl.blog is completely non-profit educational project. If you'd like to discuss more join the matrix or other social links found on the homepage. </p>
+<p>Thanks for being interested in the amazing niche of web scraping!</p>
+    </div>
+    <div class="entry-content footer">
+      <hr>
+      <div class="pure-g">
+          <div class="pure-u-1-2">
+            <applause-button style="width: 58px; height: 58px;"/>
+          </div>
+          <div class="tags pure-u-1-2">
+              <a href="http://crawl.blog/tag/techniques.html">techniques</a>
+          </div>
+      </div>
+        <script src="https://utteranc.es/client.js"
+                repo="crawl-blog/crawl-blog.github.io"
+                issue-term="discovery"
+                label="comments"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+        </script>
+
+    </div>
+  </div>
+
+
+
+    <footer class="index-footer">
+
+        <a href="http://crawl.blog/" title="🕷 crawl.blog">🕷 crawl.blog</a>
+        <a href="/archives.html">Archives</a></li>
+        <a href="/categories.html">Categories</a></li>
+        <a href="/tags.html">Tags</a></li>
+        <a href="http://crawl.blog/category/guides.html">guides</a>
+        <a href="http://crawl.blog/category/research.html">research</a>
+        <a href="http://crawl.blog/category/tools.html">tools</a>
+        <a href="atom.xml">
+          <i class="fa fa-rss-square" aria-hidden="true"></i>
+        </a>
+
+    </footer>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-132141387-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  <script data-goatcounter="https://crawl-blog.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

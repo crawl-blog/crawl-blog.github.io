@@ -77,8 +77,7 @@
       <p>Building html parser can be quite time consuming and often complicated. <a href="https://github.com/scrapy/parsel">parsel</a> is a python library for parsing html with css or xpath selectors, while <a href="https://github.com/Granitosaurus/parsel-cli">parselcli</a> is an interactive shell wrapper around it.</p>
 <p><em>Disclaimer: I wrote parselcli</em></p>
 <p>In short <code>parselcli</code> allows you to do this:</p>
-<script id="asciicast-234118" src="https://asciinema.org/a/234118.js" async></script>
-
+<script async="" id="asciicast-234118" src="https://asciinema.org/a/234118.js"></script>
 <p>At the moment version 0.31 <code>parselcli</code> has these features:</p>
 <ul>
 <li>css and xpath selectors</li>
@@ -86,24 +85,20 @@
 <li>Evaluating against cached, live urls or local files (see --cached and --file flags)</li>
 <li>
 <p>Inline executions:</p>
-<div class="highlight"><pre><span></span>$ parsel &quot;http://httpbin.org/html&quot; -c h1
-[&#39;<span class="nt">&lt;h1&gt;</span>Herman Melville - Moby-Dick<span class="nt">&lt;/h1&gt;</span>&#39;]
+<div class="highlight"><pre><span></span>$ parsel "http://httpbin.org/html" -c h1
+['<span class="nt">&lt;h1&gt;</span>Herman Melville - Moby-Dick<span class="nt">&lt;/h1&gt;</span>']
 </pre></div>
-
-
 </li>
 <li>
 <p>Supports output processors:</p>
-<div class="highlight"><pre><span></span>$ parsel <span class="s2">&quot;http://httpbin.org/html&quot;</span> -c h1::text -p join,len
+<div class="highlight"><pre><span></span>$ parsel <span class="s2">"http://httpbin.org/html"</span> -c h1::text -p join,len
 <span class="m">27</span>
 <span class="c1"># the h1 text is 27 characters long!</span>
 </pre></div>
-
-
 </li>
 <li>
 <p>Supports commands for fast workflow and debuging:</p>
-<div class="highlight"><pre><span></span>$ parsel <span class="s2">&quot;http://httpbin.org/html&quot;</span>
+<div class="highlight"><pre><span></span>$ parsel <span class="s2">"http://httpbin.org/html"</span>
 &gt; -help
 available commands <span class="o">(</span>use -command<span class="o">)</span>:
   help: show <span class="nb">help</span>
@@ -115,48 +110,40 @@ available commands <span class="o">(</span>use -command<span class="o">)</span>:
   css: switch to css selectors
   xpath: switch to xpath selectors
 </pre></div>
-
-
 </li>
 <li>
 <p>Fully configurable via <code>~/.config/parsel.toml</code> file (depending on your <code>$XDG_CONFIG</code>)</p>
 </li>
-<li>Preload embed shell for full python<div class="highlight"><pre><span></span>$ parsel <span class="s2">&quot;http://httpbin.org/html&quot;</span> --embed
+<li>Preload embed shell for full python<div class="highlight"><pre><span></span>$ parsel <span class="s2">"http://httpbin.org/html"</span> --embed
 &gt;&gt;&gt; dir<span class="o">()</span>
-<span class="o">[</span><span class="s1">&#39;request&#39;</span>, <span class="s1">&#39;response&#39;</span>, <span class="s1">&#39;sel&#39;</span><span class="o">]</span>
+<span class="o">[</span><span class="s1">'request'</span>, <span class="s1">'response'</span>, <span class="s1">'sel'</span><span class="o">]</span>
 &gt;&gt;&gt; response.cookies
 &lt;RequestsCookieJar<span class="o">[]</span>&gt;
 </pre></div>
-
-
 </li>
 </ul>
 
-      <h2>My Workflow</h2>
+      <h2 id="my workflow">My Workflow</h2>
 <p>I build <code>parselcli</code> to have faster and more convenient workflow for building html parsers.</p>
-<p><video width="480" height="240" autoplay loop muted title=""><source src="/video/spongebob_work.mp4" type="video/mp4"></video><figcaption></figcaption></p>
-<p>First thing I do is find a product/item that has the higher coverage. For example if I'm crawling a clothing shop I look for a product that has all of the fields like variants, colours, sizes and multiple prices. Shoes in often meet this criteria. <br>
+<p><video autoplay="" height="240" loop="" muted="" title="" width="480"><source src="/video/spongebob_work.mp4" type="video/mp4"/></video><figcaption></figcaption></p>
+<p>First thing I do is find a product/item that has the higher coverage. For example if I'm crawling a clothing shop I look for a product that has all of the fields like variants, colours, sizes and multiple prices. Shoes in often meet this criteria. <br/>
 This will be my <em>genesis</em> html that I will use to build my parser.</p>
 <p>I pass this url to my <code>parsel</code> and cache it in case I need to run it again in the future. </p>
-<div class="highlight"><pre><span></span>$ parsel <span class="s2">&quot;http://httpbin.org/html&quot;</span> --cache
+<div class="highlight"><pre><span></span>$ parsel <span class="s2">"http://httpbin.org/html"</span> --cache
 using cached version
 &gt;
 </pre></div>
-
-
 <p>Afterwards if the website functions without javascript I use <code>-view</code> command to open up source in my browser or <code>-open</code> command to open up live url in my browser.  </p>
-<p>In my browsers (chromium or qutebrowser) I open up inspector and click around html code and identify my css selectors if they are possible, xpath if something more complicated is required.<br>
+<p>In my browsers (chromium or qutebrowser) I open up inspector and click around html code and identify my css selectors if they are possible, xpath if something more complicated is required.<br/>
 I pop my ideas to parsel shell and see how it looks.</p>
 <div class="highlight"><pre><span></span><span class="err">&gt; h1::text</span>
-<span class="err">[&#39;Herman Melville - Moby-Dick&#39;]</span>
+<span class="err">['Herman Melville - Moby-Dick']</span>
 </pre></div>
-
-
-<p>If I'm satisfied I save the selectors in my crawler code and move on.<br>
+<p>If I'm satisfied I save the selectors in my crawler code and move on.<br/>
 Quite simple really!</p>
-<h2>Contribution is Welcome!</h2>
+<h2 id="contribution is welcome!">Contribution is Welcome!</h2>
 <p>Parselcli is still in rather early development but I've been using it <em>in production</em> for a while now. Nevertheless any contributions are welcome!</p>
-<p><a href="/img/parselcli_releases.png"><img src="/img/parselcli_releases.png" title=""></img></a><figcaption></figcaption></p>
+<p><a href="/img/parselcli_releases.png"><img src="/img/parselcli_releases.png" title=""/></a><figcaption></figcaption></p>
 <p>https://github.com/Granitosaurus/parsel-cli</p>
     </div>
     <div class="entry-content footer">
@@ -210,5 +197,7 @@ Quite simple really!</p>
       ga('send', 'pageview');
 
     </script>
+  <script data-goatcounter="https://crawl-blog.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
